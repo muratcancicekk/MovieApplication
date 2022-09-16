@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 
 class HomePageCollectionViewCell: UICollectionViewCell {
-    let imageView = UIImageView()
-    let headerTitle = UILabel()
-    let descriptionLabel = UILabel()
-    let icon = UIImageView()
-    let dateLabel = UILabel()
+   private let imageView = UIImageView()
+   private let headerTitle = UILabel()
+   private let descriptionLabel = UILabel()
+   private let icon = UIImageView()
+   private let dateLabel = UILabel()
  
 
     override func awakeFromNib() {

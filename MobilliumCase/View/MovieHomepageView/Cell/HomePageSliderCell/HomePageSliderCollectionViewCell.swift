@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 class HomePageSliderCollectionViewCell: UICollectionViewCell {
-    let view = UIView()
-    let image = UIImageView()
-    let headerLabel = UILabel()
-    let subtitleLabel = UILabel()
+   private let view = UIView()
+   private let image = UIImageView()
+   private let headerLabel = UILabel()
+   private let subtitleLabel = UILabel()
     
     override func awakeFromNib() {
         super.awakeFromNib()

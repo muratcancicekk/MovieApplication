@@ -8,14 +8,14 @@
 import UIKit
 
 class MovieDetailsViewController: BaseViewController {
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblDescription: UILabel!
-    @IBOutlet weak var lblIMBDScore: UILabel!
-    @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak private var lblTitle: UILabel!
+    @IBOutlet weak private var lblDescription: UILabel!
+    @IBOutlet weak private var lblIMBDScore: UILabel!
+    @IBOutlet weak private var lblDate: UILabel!
 
     var id: Int?
-    let viewModel = DetailViewModel()
+    private let viewModel = DetailViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +31,15 @@ class MovieDetailsViewController: BaseViewController {
         createProgressView()
 
     }
-    
-    func createProgressView(){
+
+    private func createProgressView() {
         addChild(child)
         child.view.frame = view.frame
         view.addSubview(child.view)
         child.didMove(toParent: self)
     }
-    
-    func setBackBtn() {
+
+    private func setBackBtn() {
         let backBtn = UIBarButtonItem()
         let image: UIImage = UIImage(named: "icon_back")!
         backBtn.image = image
@@ -48,7 +48,7 @@ class MovieDetailsViewController: BaseViewController {
         backBtn.tintColor = .black
         self.navigationItem.leftBarButtonItem = backBtn
     }
-    @objc func makePop2() {
+    @objc private func makePop2() {
         makePop()
     }
 }

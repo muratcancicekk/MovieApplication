@@ -12,16 +12,16 @@ class MoviewHomePageViewController: BaseViewController {
     private let layoutHorizantal: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     private let homePageCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private let homePageSliderCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    let refreshControl = UIRefreshControl()
-    var timer: Timer?
-    var isRefleshing = false
-    var currentCellIndex = 0
-    let pageControl = UIPageControl()
-    let viewModel = HomeViewModel()
-    var sliderModel = [Movies]()
-    var listModel = [Movies]()
-    var sliderIndex = 1
-    var listIndex = 1
+    private let refreshControl = UIRefreshControl()
+    private var timer: Timer?
+    private var isRefleshing = false
+    private var currentCellIndex = 0
+    private let pageControl = UIPageControl()
+    private let viewModel = HomeViewModel()
+    private var sliderModel = [Movies]()
+    private var listModel = [Movies]()
+    private var sliderIndex = 1
+    private var listIndex = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +32,10 @@ class MoviewHomePageViewController: BaseViewController {
         viewModel.getList()
         collectionViewRegister()
         setSnapkit()
-       
+
         reflessControl()
         setProgressView()
-        
+
     }
     func setProgressView() {
         addChild(child)
