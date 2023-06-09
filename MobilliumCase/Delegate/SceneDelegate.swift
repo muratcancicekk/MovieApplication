@@ -8,6 +8,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    static var shared: SceneDelegate = SceneDelegate()
 
     var window: UIWindow?
 
@@ -17,6 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        SceneDelegate.shared.window = window
+        let homeVC = MoviewHomePageViewController(viewModel: HomeViewModel())
+        let nav = BaseNavigationVC(rootViewController: homeVC)
+        self.window?.rootViewController = nav
+        self.window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

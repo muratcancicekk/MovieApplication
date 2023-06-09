@@ -1,0 +1,34 @@
+//
+//  Service.swift
+//  MobilliumCase
+//
+//  Created by Murat Çiçek on 6.06.2023.
+//
+
+import Foundation
+
+class Service {
+    
+    func getHomeSlider(page :Int = 1,
+                       success: @escaping ((HomeListModel?) -> Void),
+                       failure: @escaping ((CustomError) -> Void)) {
+        Network.shared.request(urlType: .slider, page: page) {  (reponse : Result<HomeListModel, CustomError>) in
+            switch reponse {
+            case .success(let responce):
+                success(responce)
+            case .failure(let error):
+                failure(error)
+            }
+        }
+    }
+    func getHomeList(page : Int = 1, success: @escaping ((HomeListModel?) -> Void), failure: @escaping ((CustomError) -> Void)) {
+        Network.shared.request(urlType: .list, page: page) { (reponse : Result<HomeListModel, CustomError>) in
+            switch reponse {
+            case .success(let responce):
+                success(responce)
+            case .failure(let error):
+                failure(error)
+            }
+        }
+    }
+}
