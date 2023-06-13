@@ -17,7 +17,9 @@ class HomeViewModel: BaseViewModel  {
     var listIndex = 1
 
     override func start() {
-        fetchDataWithDispatchGroup()
+       // getSliderMovies()
+       // getMoviesList()
+       fetchDataWithDispatchGroup()
     }
     func getSliderMovies(pageNumber: Int = 1, completion: @escaping () -> Void = {}) {
         service.getHomeSlider(page: pageNumber) { [weak self] sliderMovies in

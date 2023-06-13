@@ -6,13 +6,6 @@
 //
 
 import UIKit
-enum HomeViewCell {
-    case slider
-    case list
-}
-struct HomeViewSection {
-    let cell: HomeViewCell
-}
 
 class MoviewHomePageViewController: BaseViewController<HomeViewModel, HomeViewState> {
     private let layoutVertical: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
@@ -20,16 +13,25 @@ class MoviewHomePageViewController: BaseViewController<HomeViewModel, HomeViewSt
     private let homePageCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private let homePageSliderCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private let refreshControl = UIRefreshControl()
-    var homeSection = [HomeViewSection]()
     private var timer: Timer?
     private var isRefleshing = false
     private var currentCellIndex = 0
     private let pageControl = UIPageControl()
+    private var sliderModel = [Movies]()
+    private var listModel = [Movies]()
     private var sliderIndex = 1
-    
+    private var listIndex = 1
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
+        homePageSliderCollectionView.isUserInteractionEnabled = true
+        view.addSubviews(homePageCollectionView, homePageSliderCollectionView, pageControl)
+  
+        collectionViewRegister()
+        setSnapkit()
+        reflessControl()
+        setProgressView()
+
     }
     override func didStateChanged(oldState: HomeViewState?, newState: HomeViewState) {
         super.didStateChanged(oldState: oldState, newState: newState)
@@ -37,104 +39,49 @@ class MoviewHomePageViewController: BaseViewController<HomeViewModel, HomeViewSt
         case .homeDidLoad:
             homePageCollectionView.reloadData()
             homePageSliderCollectionView.reloadData()
+            stopAndHideSpinner()
         }
     }
-}
-extension MoviewHomePageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return homeSection.count
+    func setProgressView() {
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let homeSection = homeSection[section].cell
-        switch homeSection {
-        case .slider:
-            return viewModel.sliderMoviesData.count
-        case .list:
-            return viewModel.listMoviesData.count
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let homeSection = homeSection[indexPath.section].cell
-        switch homeSection {
-        case .slider:
-            let cell: HomePageSliderCollectionViewCell = collectionView.dequeue(for: indexPath)
-            let movie = viewModel.sliderMoviesData[indexPath.row]
-            cell.configure(sliderModel: movie)
-            return cell
-        case .list:
-            let cell: HomePageCollectionViewCell = collectionView.dequeue(for: indexPath)
-            let listMovie = viewModel.listMoviesData[indexPath.row]
-            cell.configure(model: listMovie)
-            return cell
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let homeSection = homeSection[indexPath.section].cell
-        switch homeSection {
-        case .slider:
-            return CGSize(width: UIScreen.width, height: UIScreen.height * 0.3)
 
-        case .list:
-            return CGSize(width: UIScreen.width, height: UIScreen.height * 0.15)
-
-        }
+    func reflessControl() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        homePageCollectionView.addSubview(refreshControl)
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let homeSection = homeSection[indexPath.section].cell
-        switch homeSection {
-        case .slider:
-            let choisonMovie = viewModel.sliderMoviesData[indexPath.row]
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MovieDetailsViewController") as! MovieDetailsViewController
-            vc.id = choisonMovie.id ?? 0
-            makePush(toView: vc)
-        case .list:
-            let choisonMovie = viewModel.listMoviesData[indexPath.row]
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MovieDetailsViewController") as! MovieDetailsViewController
-            vc.id = choisonMovie.id ?? 0
-            makePush(toView: vc)
+
+    func startTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
+    }
+    @objc func refresh(_ sender: AnyObject) {
+        self.isRefleshing = true
+    }
+
+    @objc func moveToNextIndex() {
+        if currentCellIndex < sliderModel.count - 1 {
+            currentCellIndex += 1
         }
+        else {
+            currentCellIndex = 0
+        }
+
+        homePageSliderCollectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
+        pageControl.currentPage = currentCellIndex
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        if indexPath.row == viewModel.listMoviesData.count - 3 {
-            viewModel.listIndex += 1
-            viewModel.getMoviesList(page: viewModel.listIndex)
-          }
+
+        if indexPath.row == listModel.count - 3 {
+            listIndex += 1
+        }
     }
-}
-extension MoviewHomePageViewController {
-    fileprivate func configureUI() {
-        homePageSliderCollectionView.isUserInteractionEnabled = true
-        view.addSubviews(homePageCollectionView, homePageSliderCollectionView, pageControl)
-        collectionViewRegister()
-        setSnapkit()
-        reflessControl()
-        setProgressView()
-    }
-    private func collectionViewRegister() {
-        layoutVertical.scrollDirection = UICollectionView.ScrollDirection.vertical
-        layoutHorizantal.scrollDirection = UICollectionView.ScrollDirection.horizontal
-        homePageCollectionView.setCollectionViewLayout(layoutVertical, animated: true)
-        homePageSliderCollectionView.register(cell: HomePageSliderCollectionViewCell.self)
-        homePageCollectionView.register(cell: HomePageCollectionViewCell.self)
-        homePageCollectionView.dataSource = self
-        homePageCollectionView.delegate = self
-        homePageSliderCollectionView.setCollectionViewLayout(layoutHorizantal, animated: true)
-        homePageSliderCollectionView.dataSource = self
-        homePageSliderCollectionView.delegate = self
-        homePageCollectionView.showsVerticalScrollIndicator = false
-        homePageSliderCollectionView.isPagingEnabled = true
-        homePageSliderCollectionView.showsHorizontalScrollIndicator = false
-        setSection()
-    }
-    private func setSection() {
-        homeSection.append(HomeViewSection(cell: .slider))
-        homeSection.append(HomeViewSection(cell: .list))
-    }
+
     private func applyStyle() {
-        pageControl.numberOfPages = viewModel.sliderMoviesData.count
+        pageControl.numberOfPages = sliderModel.count
         pageControl.currentPageIndicatorTintColor = .white
     }
     private func setSnapkit() {
@@ -156,37 +103,76 @@ extension MoviewHomePageViewController {
             make.right.equalToSuperview().offset(-20)
         }
     }
-    func setProgressView() {
-        addChild(child)
-        child.view.frame = view.frame
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
-    }
-    
-    func reflessControl() {
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        homePageCollectionView.addSubview(refreshControl)
-    }
-    
-    func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(moveToNextIndex), userInfo: nil, repeats: true)
-    }
-    @objc func refresh(_ sender: AnyObject) {
-        self.isRefleshing = true
-          viewModel.getMoviesList()
-    }
-    
-    @objc func moveToNextIndex() {
-        if currentCellIndex < viewModel.sliderMoviesData.count - 1 {
-            currentCellIndex += 1
-        }
-        else {
-            currentCellIndex = 0
-        }
-        homePageSliderCollectionView.scrollToItem(at: IndexPath(item: currentCellIndex, section: 0), at: .centeredHorizontally, animated: true)
-        pageControl.currentPage = currentCellIndex
+
+    private func collectionViewRegister() {
+        layoutVertical.scrollDirection = UICollectionView.ScrollDirection.vertical
+        layoutHorizantal.scrollDirection = UICollectionView.ScrollDirection.horizontal
+        homePageCollectionView.setCollectionViewLayout(layoutVertical, animated: true)
+        homePageCollectionView.register(cell: HomePageCollectionViewCell.self)
+        homePageCollectionView.dataSource = self
+        homePageCollectionView.delegate = self
+        homePageSliderCollectionView.setCollectionViewLayout(layoutHorizantal, animated: true)
+        homePageSliderCollectionView.register(cell: HomePageSliderCollectionViewCell.self)
+        homePageSliderCollectionView.dataSource = self
+        homePageSliderCollectionView.delegate = self
+        homePageCollectionView.showsVerticalScrollIndicator = false
+        homePageSliderCollectionView.isPagingEnabled = true
+        homePageSliderCollectionView.showsHorizontalScrollIndicator = false
     }
 }
+extension MoviewHomePageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == homePageSliderCollectionView {
+            return sliderModel.count
+        }
+        else {
+            return listModel.count
+        }
+    }
 
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        if collectionView == homePageSliderCollectionView {
+            let cell: HomePageSliderCollectionViewCell = collectionView.dequeue(for: indexPath)
+            let movie = sliderModel[indexPath.row]
+            cell.configure(sliderModel: movie)
+
+            return cell
+        }
+        else {
+            let cell: HomePageCollectionViewCell = collectionView.dequeue(for: indexPath)
+            let listMovie = listModel[indexPath.row]
+            cell.configure(model: listMovie)
+
+            return cell
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        if collectionView == homePageSliderCollectionView {
+            return CGSize(width: UIScreen.width, height: UIScreen.height * 0.3)
+        }
+        else {
+            return CGSize(width: UIScreen.width, height: UIScreen.height * 0.15)
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == homePageSliderCollectionView {
+            let choisonMovie = sliderModel[indexPath.row]
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MovieDetailsViewController") as! MovieDetailsViewController
+            vc.id = choisonMovie.id ?? 0
+            makePush(toView: vc)
+        }
+        else {
+            let choisonMovie = listModel[indexPath.row]
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "MovieDetailsViewController") as! MovieDetailsViewController
+            vc.id = choisonMovie.id ?? 0
+            makePush(toView: vc)
+        }
+    }
+}
 
