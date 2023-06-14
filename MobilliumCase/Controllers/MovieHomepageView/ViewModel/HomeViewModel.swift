@@ -17,14 +17,15 @@ class HomeViewModel: BaseViewModel  {
     var listIndex = 1
 
     override func start() {
-       // getSliderMovies()
-       // getMoviesList()
+        //getSliderMovies()
+        //getMoviesList()
        fetchDataWithDispatchGroup()
     }
     func getSliderMovies(pageNumber: Int = 1, completion: @escaping () -> Void = {}) {
         service.getHomeSlider(page: pageNumber) { [weak self] sliderMovies in
             if let sliderMovies = sliderMovies?.results {
                 self?.sliderMoviesData = sliderMovies
+                self?.changeState(to: HomeViewState.homeDidLoad)
                 completion()
             }
         } failure: { [weak self] error in
@@ -36,6 +37,8 @@ class HomeViewModel: BaseViewModel  {
         service.getHomeList { [weak self] listMovies in
             if let listMovies = listMovies?.results {
                 self?.listMoviesData = listMovies
+                self?.changeState(to: HomeViewState.homeDidLoad)
+
                 completion()
             }
         } failure: { [weak self] error in

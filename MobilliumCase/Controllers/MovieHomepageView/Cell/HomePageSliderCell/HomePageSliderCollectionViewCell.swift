@@ -19,6 +19,7 @@ class HomePageSliderCollectionViewCell: UICollectionViewCell {
         
         addSubview(image)
         image.addSubviews(view,headerLabel,subtitleLabel)
+        
         applyStyle()
         setSnapkit()
         // Initialization code
@@ -44,6 +45,7 @@ class HomePageSliderCollectionViewCell: UICollectionViewCell {
             make.left.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
+
         }
         headerLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)

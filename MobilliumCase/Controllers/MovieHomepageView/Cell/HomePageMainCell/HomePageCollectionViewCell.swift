@@ -8,28 +8,25 @@
 import UIKit
 import SnapKit
 
-class HomePageCollectionViewCell: UICollectionViewCell {
-   private let imageView = UIImageView()
+class HomePageCollectionViewCell: UITableViewCell {
    private let headerTitle = UILabel()
    private let descriptionLabel = UILabel()
    private let icon = UIImageView()
    private let dateLabel = UILabel()
- 
+    private let imageViews = UIImageView()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        addSubviews(imageView, headerTitle, descriptionLabel, icon, dateLabel)
-
+        addSubviews(imageViews, headerTitle, descriptionLabel, icon, dateLabel)
         applyStyle()
         setSnapkit()
     }
 
-
     private func applyStyle() {
-        imageView.image = UIImage(named: "dumydata")
-        self.imageView.layer.masksToBounds = true
-        imageView.cornerRadius = 8
-        imageView.contentMode = .scaleToFill
+        imageViews.image = UIImage(named: "dumydata")
+        self.imageViews.layer.masksToBounds = true
+        imageViews.cornerRadius = 8
+        imageViews.contentMode = .scaleToFill
         headerTitle.styleLabel(title: "The Great Beauty (2013)", textAlignment: .left, color: .black, fontSize: UIFont.systemFont(ofSize: 15, weight: .bold))
         descriptionLabel.styleLabel(title: "Jep Gambardella has seduced his way through the lavish…", textAlignment: .left, color: .gray, fontSize: UIFont.systemFont(ofSize: 13, weight: .medium))
         dateLabel.styleLabel(title: "15.06.2021", textAlignment: .right, color: .gray, fontSize: UIFont.systemFont(ofSize: 12, weight: .medium))
@@ -40,7 +37,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
 
     }
     private func setSnapkit() {
-        imageView.snp.makeConstraints { make in
+        imageViews.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(16)
             make.top.equalToSuperview().offset(16)
             make.bottom.equalToSuperview().offset(-16)
@@ -48,14 +45,14 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         }
         headerTitle.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-44)
-            make.left.equalTo(imageView.snp.right).offset(8)
+            make.left.equalTo(imageViews.snp.right).offset(8)
             make.top.equalToSuperview().offset(25)
 
         }
         descriptionLabel.snp.makeConstraints { make in
             make.right.equalTo(icon.snp.left).offset(-11)
             make.top.equalTo(headerTitle.snp.bottom).offset(8)
-            make.left.equalTo(imageView.snp.right).offset(8)
+            make.left.equalTo(imageViews.snp.right).offset(8)
         }
         icon.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-20)
@@ -70,7 +67,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
 
     }
     func configure(model:Movies){
-        self.imageView.setImage(with: model.posterPath?.setImageURL)
+        self.imageViews.setImage(with: model.posterPath?.setImageURL)
         self.headerTitle.text = model.title
         self.descriptionLabel.text = model.overview
         self.dateLabel.text = model.releaseDate

@@ -51,6 +51,11 @@
 		FB587C132A33C8B6009F6FC4 /* HomePageSliderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB587C112A33C8B6009F6FC4 /* HomePageSliderCollectionViewCell.xib */; };
 		FB587C162A33C8DB009F6FC4 /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB587C142A33C8DB009F6FC4 /* HomePageCollectionViewCell.swift */; };
 		FB587C172A33C8DB009F6FC4 /* HomePageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB587C152A33C8DB009F6FC4 /* HomePageCollectionViewCell.xib */; };
+		FBB65C062A3A340C000245B7 /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB65C052A3A340C000245B7 /* CustomLayout.swift */; };
+		FBB65C092A3A35DD000245B7 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB65C082A3A35DD000245B7 /* TypeAlias.swift */; };
+		FBB65C0B2A3A365C000245B7 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB65C0A2A3A365C000245B7 /* UITableView+Extension.swift */; };
+		FBB65C0E2A3A3A16000245B7 /* HomePageSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB65C0C2A3A3A16000245B7 /* HomePageSliderTableViewCell.swift */; };
+		FBB65C0F2A3A3A16000245B7 /* HomePageSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBB65C0D2A3A3A16000245B7 /* HomePageSliderTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +103,11 @@
 		FB587C112A33C8B6009F6FC4 /* HomePageSliderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageSliderCollectionViewCell.xib; sourceTree = "<group>"; };
 		FB587C142A33C8DB009F6FC4 /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB587C152A33C8DB009F6FC4 /* HomePageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageCollectionViewCell.xib; sourceTree = "<group>"; };
+		FBB65C052A3A340C000245B7 /* CustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
+		FBB65C082A3A35DD000245B7 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
+		FBB65C0A2A3A365C000245B7 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		FBB65C0C2A3A3A16000245B7 /* HomePageSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageSliderTableViewCell.swift; sourceTree = "<group>"; };
+		FBB65C0D2A3A3A16000245B7 /* HomePageSliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageSliderTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,9 +215,11 @@
 		A8380E6228D1E7DC00815B4B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FBB65C072A3A35D3000245B7 /* Tools */,
 				A8F87E4F28D3577700257AD4 /* Spinner */,
 				A8F87E2E28D32DD100257AD4 /* Helpers */,
 				A8380E6328D1E80500815B4B /* Extension */,
+				FBB65C052A3A340C000245B7 /* CustomLayout.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -224,6 +236,7 @@
 				A8F87E4D28D3340A00257AD4 /* String+Extension.swift */,
 				FB09263C2A2F964A00A56A96 /* AlertShowable.swift */,
 				FB587C0E2A33C043009F6FC4 /* UICollectionView+Extension.swift */,
+				FBB65C0A2A3A365C000245B7 /* UITableView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -251,6 +264,8 @@
 			children = (
 				FB587C102A33C8B6009F6FC4 /* HomePageSliderCollectionViewCell.swift */,
 				FB587C112A33C8B6009F6FC4 /* HomePageSliderCollectionViewCell.xib */,
+				FBB65C0C2A3A3A16000245B7 /* HomePageSliderTableViewCell.swift */,
+				FBB65C0D2A3A3A16000245B7 /* HomePageSliderTableViewCell.xib */,
 			);
 			path = HomePageSliderCell;
 			sourceTree = "<group>";
@@ -332,6 +347,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		FBB65C072A3A35D3000245B7 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				FBB65C082A3A35DD000245B7 /* TypeAlias.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -400,6 +423,7 @@
 			files = (
 				A8380E5628D1E79F00815B4B /* LaunchScreen.storyboard in Resources */,
 				FB587C172A33C8DB009F6FC4 /* HomePageCollectionViewCell.xib in Resources */,
+				FBB65C0F2A3A3A16000245B7 /* HomePageSliderTableViewCell.xib in Resources */,
 				FB587C132A33C8B6009F6FC4 /* HomePageSliderCollectionViewCell.xib in Resources */,
 				A8380E5328D1E79F00815B4B /* Assets.xcassets in Resources */,
 				A8380E5128D1E79C00815B4B /* Main.storyboard in Resources */,
@@ -420,7 +444,9 @@
 				A8F87E2B28D32D9500257AD4 /* UrlParts.swift in Sources */,
 				A8F87E3628D32E4400257AD4 /* MovieDetailModel.swift in Sources */,
 				FB0926392A2F95C000A56A96 /* BaseViewController.swift in Sources */,
+				FBB65C0B2A3A365C000245B7 /* UITableView+Extension.swift in Sources */,
 				A8F87E5128D3578200257AD4 /* Spinner.swift in Sources */,
+				FBB65C062A3A340C000245B7 /* CustomLayout.swift in Sources */,
 				FB0926362A2F91CE00A56A96 /* Service.swift in Sources */,
 				A8F87E4E28D3340A00257AD4 /* String+Extension.swift in Sources */,
 				A8DFE9A728D215F500304608 /* MovieDetailsViewController.swift in Sources */,
@@ -441,6 +467,7 @@
 				A8380E4E28D1E79C00815B4B /* ViewController.swift in Sources */,
 				A8F87E3028D32DD800257AD4 /* Logger.swift in Sources */,
 				A8380E4A28D1E79C00815B4B /* AppDelegate.swift in Sources */,
+				FBB65C0E2A3A3A16000245B7 /* HomePageSliderTableViewCell.swift in Sources */,
 				A8F87E3228D32E2800257AD4 /* HomeListModel.swift in Sources */,
 				A8F87E4128D32ECA00257AD4 /* HomeViewModel.swift in Sources */,
 				A8F87E2728D32D7600257AD4 /* UrlType.swift in Sources */,
@@ -448,6 +475,7 @@
 				FB587C0D2A33BE69009F6FC4 /* BaseNavigationController.swift in Sources */,
 				FB587C0F2A33C043009F6FC4 /* UICollectionView+Extension.swift in Sources */,
 				A8F87E2328D32D3800257AD4 /* Network.swift in Sources */,
+				FBB65C092A3A35DD000245B7 /* TypeAlias.swift in Sources */,
 				A8F87E3A28D32E6700257AD4 /* ProductionCompany.swift in Sources */,
 				A8380E4C28D1E79C00815B4B /* SceneDelegate.swift in Sources */,
 			);
