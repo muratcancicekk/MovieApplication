@@ -12,9 +12,9 @@ class BaseViewController<T: BaseViewModel, S>: UIViewController, AlertShowable {
     let child = SpinnerViewController()
     var viewModel: T!
     var navButtonTapped: (() -> Void)?
-
+    
     var cancellables: Set<AnyCancellable> = []
-
+    
     init(viewModel: T) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
@@ -29,22 +29,21 @@ class BaseViewController<T: BaseViewModel, S>: UIViewController, AlertShowable {
             }
         }
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.start()
         self.bind()
     }
-
+    
     func bind() {}
-
+    
     func didStateChanged(oldState: S?, newState: S) {}
-
+    
     func hideBackButton() {
         self.navigationItem.hidesBackButton = true
     }
@@ -59,5 +58,31 @@ class BaseViewController<T: BaseViewModel, S>: UIViewController, AlertShowable {
         child.view.removeFromSuperview()
         child.removeFromParent()
     }
-
+    func setupBackButton() {
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        backButton.tintColor = .black
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    func setHeaderTitleView(title: String? = "Title", image: String? = nil) {
+        if image == nil {
+            let titleLbl = UILabel()
+            titleLbl.text = title
+            titleLbl.textColor = .black
+            titleLbl.font = UIFont.systemFont(ofSize: 24)
+            titleLbl.adjustsFontSizeToFitWidth = true
+            titleLbl.minimumScaleFactor = 0.5
+            self.navigationItem.titleView = titleLbl
+            return
+        }
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: image ?? "")
+        imageView.contentMode = .center
+        
+        self.navigationItem.titleView = imageView
+    }
 }

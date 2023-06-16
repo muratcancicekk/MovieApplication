@@ -21,6 +21,7 @@ class Service {
             }
         }
     }
+    
     func getHomeList(page : Int = 1, success: @escaping ((HomeListModel?) -> Void), failure: @escaping ((CustomError) -> Void)) {
         Network.shared.request(urlType: .list, page: page) { (reponse : Result<HomeListModel, CustomError>) in
             switch reponse {
@@ -31,4 +32,14 @@ class Service {
             }
         }
     }
-}
+    
+    func getMovieDetail(movieId :Int = 550, success: @escaping ((MovieDetailModel?) -> Void), failure: @escaping ((CustomError) -> Void)){
+        Network.shared.request(urlType: .detail, page: movieId) { (reponse : Result<MovieDetailModel, CustomError>) in
+            switch reponse {
+            case .success(let responce):
+               success(responce)
+            case .failure(let error):
+                failure(error)
+            }
+        }
+    }}

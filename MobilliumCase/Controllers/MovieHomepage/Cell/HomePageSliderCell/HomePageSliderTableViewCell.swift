@@ -11,7 +11,7 @@ class HomePageSliderTableViewCell: UITableViewCell {
     private let layoutHorizantal: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let pageControl = UIPageControl()
-    var adTapped: ((Int) -> Void)?
+    var movieTapped: ((Int) -> Void)?
     var timer: Timer?
     
     var currentPage = 0 {
@@ -25,6 +25,7 @@ class HomePageSliderTableViewCell: UITableViewCell {
             pageControl.numberOfPages = movies?.count ?? 0
         }
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -42,12 +43,13 @@ extension HomePageSliderTableViewCell: ConfigureCollectionView, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomePageSliderCollectionViewCell = collectionView.dequeue(for: indexPath)
         guard let movies = movies else { return UICollectionViewCell() }
-        cell.configure(sliderModel: movies[indexPath.row])
+        cell.setupUI(sliderModel: movies[indexPath.row])
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        adTapped?(indexPath.item)
+        guard let movieID = movies?[indexPath.row].id else { return }
+        movieTapped?(movieID)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -71,7 +73,6 @@ extension HomePageSliderTableViewCell {
         configureCollectionView()
         setSnapKit()
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(changeCurrentImage), userInfo: nil, repeats: true)
-
     }
     @objc private func changeCurrentImage() {
         if (movies?.count ?? 0) != 0 {

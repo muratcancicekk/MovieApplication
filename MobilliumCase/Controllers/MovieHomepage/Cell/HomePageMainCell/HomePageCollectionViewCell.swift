@@ -9,21 +9,23 @@ import UIKit
 import SnapKit
 
 class HomePageCollectionViewCell: UITableViewCell {
-   private let headerTitle = UILabel()
-   private let descriptionLabel = UILabel()
-   private let icon = UIImageView()
-   private let dateLabel = UILabel()
+    
+    private let headerTitle = UILabel()
+    private let descriptionLabel = UILabel()
+    private let icon = UIImageView()
+    private let dateLabel = UILabel()
     private let imageViews = UIImageView()
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         addSubviews(imageViews, headerTitle, descriptionLabel, icon, dateLabel)
         applyStyle()
         setSnapkit()
     }
-
+    
     private func applyStyle() {
         imageViews.image = UIImage(named: "dumydata")
+        headerTitle.numberOfLines = 2
         self.imageViews.layer.masksToBounds = true
         imageViews.cornerRadius = 8
         imageViews.contentMode = .scaleToFill
@@ -32,9 +34,9 @@ class HomePageCollectionViewCell: UITableViewCell {
         dateLabel.styleLabel(title: "15.06.2021", textAlignment: .right, color: .gray, fontSize: UIFont.systemFont(ofSize: 12, weight: .medium))
         descriptionLabel.numberOfLines = 2
         icon.image = UIImage(named: "icon_right")
-
-
-
+        
+        
+        
     }
     private func setSnapkit() {
         imageViews.snp.makeConstraints { make in
@@ -47,11 +49,11 @@ class HomePageCollectionViewCell: UITableViewCell {
             make.right.equalToSuperview().offset(-44)
             make.left.equalTo(imageViews.snp.right).offset(8)
             make.top.equalToSuperview().offset(25)
-
+            make.height.equalTo(40)
         }
         descriptionLabel.snp.makeConstraints { make in
             make.right.equalTo(icon.snp.left).offset(-11)
-            make.top.equalTo(headerTitle.snp.bottom).offset(8)
+            make.top.equalTo(headerTitle.snp.bottom).offset(0)
             make.left.equalTo(imageViews.snp.right).offset(8)
         }
         icon.snp.makeConstraints { make in
@@ -63,16 +65,15 @@ class HomePageCollectionViewCell: UITableViewCell {
             make.right.equalToSuperview().offset(-44)
             make.bottom.equalToSuperview().offset(16)
         }
-
-
-    }
-    func configure(model:Movies){
-        self.imageViews.setImage(with: model.posterPath?.setImageURL)
-        self.headerTitle.text = model.title
-        self.descriptionLabel.text = model.overview
-        self.dateLabel.text = model.releaseDate
+        
         
     }
-
+    func configure(model:Movies){
+        imageViews.setImage(with: model.posterPath?.setImageURL)
+        headerTitle.text = model.title
+        descriptionLabel.text = model.overview
+        dateLabel.text = model.releaseDate
+    }
+    
 }
 
