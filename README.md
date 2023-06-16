@@ -10,6 +10,7 @@
 - UIkit Programmatically
 - Storyboards
 - MVVM
+- Pagination
 ## ----------------
 https://user-images.githubusercontent.com/62101026/190590975-a64710e7-f887-49c3-9b5e-fd47bec9ce1e.mp4
 
