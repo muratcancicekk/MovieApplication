@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A8380E4A28D1E79C00815B4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8380E4928D1E79C00815B4B /* AppDelegate.swift */; };
 		A8380E4C28D1E79C00815B4B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8380E4B28D1E79C00815B4B /* SceneDelegate.swift */; };
-		A8380E4E28D1E79C00815B4B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8380E4D28D1E79C00815B4B /* ViewController.swift */; };
 		A8380E5128D1E79C00815B4B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8380E4F28D1E79C00815B4B /* Main.storyboard */; };
 		A8380E5328D1E79F00815B4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8380E5228D1E79F00815B4B /* Assets.xcassets */; };
 		A8380E5628D1E79F00815B4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8380E5428D1E79F00815B4B /* LaunchScreen.storyboard */; };
@@ -65,7 +64,6 @@
 		A8380E4628D1E79C00815B4B /* MobilliumCase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobilliumCase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8380E4928D1E79C00815B4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8380E4B28D1E79C00815B4B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A8380E4D28D1E79C00815B4B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A8380E5028D1E79C00815B4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8380E5228D1E79F00815B4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8380E5528D1E79F00815B4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 				A8380E5F28D1E7C600815B4B /* Network */,
 				A8380E5E28D1E7C100815B4B /* Model */,
 				A8380E5D28D1E7BB00815B4B /* Delegate */,
-				A8380E4D28D1E79C00815B4B /* ViewController.swift */,
 				A8380E5228D1E79F00815B4B /* Assets.xcassets */,
 				A8380E5728D1E79F00815B4B /* Info.plist */,
 			);
@@ -483,7 +480,6 @@
 				A8380E6728D1E83A00815B4B /* UIScreen+Extension.swift in Sources */,
 				A8F87E3828D32E5400257AD4 /* Genre.swift in Sources */,
 				A8F87E2928D32D8800257AD4 /* ApiKeys.swift in Sources */,
-				A8380E4E28D1E79C00815B4B /* ViewController.swift in Sources */,
 				FB41813D2A3C869C0059F0C0 /* MovieDetailVC.swift in Sources */,
 				A8F87E3028D32DD800257AD4 /* Logger.swift in Sources */,
 				A8380E4A28D1E79C00815B4B /* AppDelegate.swift in Sources */,
