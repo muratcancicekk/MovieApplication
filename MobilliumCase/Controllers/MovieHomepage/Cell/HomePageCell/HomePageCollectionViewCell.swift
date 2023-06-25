@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomePageCollectionViewCell: UITableViewCell {
+final class HomePageCollectionViewCell: UITableViewCell {
     
     private let headerTitle = UILabel()
     private let descriptionLabel = UILabel()

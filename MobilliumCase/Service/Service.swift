@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Service {
+final class Service {
     
     func getHomeSlider(page :Int = 1,
                        success: @escaping ((HomeListModel?) -> Void),

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SpinnerViewController: UIViewController {
+final class SpinnerViewController: UIViewController {
     var spinner = UIActivityIndicatorView(style: .large)
 
     override func loadView() {

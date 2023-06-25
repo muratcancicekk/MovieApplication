@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailVC: BaseViewController<DetailViewModel, DetailsViewState> {
+final class MovieDetailVC: BaseViewController<DetailViewModel, DetailsViewState> {
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet  private var lblTitle: UILabel!
     @IBOutlet weak private var lblDescription: UILabel!

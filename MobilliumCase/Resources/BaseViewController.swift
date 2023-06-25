@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class BaseViewController<T: BaseViewModel, S>: UIViewController, AlertShowable {
+ class BaseViewController<T: BaseViewModel, S>: UIViewController, AlertShowable {
     let child = SpinnerViewController()
     var viewModel: T!
     var navButtonTapped: (() -> Void)?

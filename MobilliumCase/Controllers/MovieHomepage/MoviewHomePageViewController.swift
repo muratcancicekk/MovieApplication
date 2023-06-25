@@ -15,7 +15,7 @@ struct HomePageSectionHelper {
     let cell: HomePageCellEnum
 }
 
-class MoviewHomePageViewController: BaseViewController<HomeViewModel, HomeViewState> {
+final class MoviewHomePageViewController: BaseViewController<HomeViewModel, HomeViewState> {
     
     private let tableView = UITableView()
     private let refreshControl = UIRefreshControl()
