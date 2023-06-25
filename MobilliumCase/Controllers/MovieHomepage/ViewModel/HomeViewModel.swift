@@ -11,7 +11,7 @@ enum HomeViewState {
     case homeDidLoad
     case openDetail(Int)
 }
-class HomeViewModel: BaseViewModel  {
+final class HomeViewModel: BaseViewModel  {
     lazy var service = Service()
     var sliderMoviesData = [Movies]()
     var listMoviesData = [Movies]()

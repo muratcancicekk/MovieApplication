@@ -254,13 +254,13 @@
 			path = MovieDetails;
 			sourceTree = "<group>";
 		};
-		A8B96B9828D26E9100A0BE42 /* HomePageMainCell */ = {
+		A8B96B9828D26E9100A0BE42 /* HomePageCell */ = {
 			isa = PBXGroup;
 			children = (
 				FB587C142A33C8DB009F6FC4 /* HomePageCollectionViewCell.swift */,
 				FB587C152A33C8DB009F6FC4 /* HomePageCollectionViewCell.xib */,
 			);
-			path = HomePageMainCell;
+			path = HomePageCell;
 			sourceTree = "<group>";
 		};
 		A8B96B9928D26E9D00A0BE42 /* HomePageSliderCell */ = {
@@ -288,7 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				A8B96B9928D26E9D00A0BE42 /* HomePageSliderCell */,
-				A8B96B9828D26E9100A0BE42 /* HomePageMainCell */,
+				A8B96B9828D26E9100A0BE42 /* HomePageCell */,
 			);
 			path = Cell;
 			sourceTree = "<group>";

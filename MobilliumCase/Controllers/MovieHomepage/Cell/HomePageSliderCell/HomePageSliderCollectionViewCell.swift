@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomePageSliderCollectionViewCell: UICollectionViewCell {
+final class HomePageSliderCollectionViewCell: UICollectionViewCell {
     private let view = UIView()
     private let image = UIImageView()
     private let headerLabel = UILabel()

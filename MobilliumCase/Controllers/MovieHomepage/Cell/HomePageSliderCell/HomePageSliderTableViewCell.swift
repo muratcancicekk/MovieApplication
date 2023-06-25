@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomePageSliderTableViewCell: UITableViewCell {
+final class HomePageSliderTableViewCell: UITableViewCell {
     private let layoutHorizantal: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let pageControl = UIPageControl()

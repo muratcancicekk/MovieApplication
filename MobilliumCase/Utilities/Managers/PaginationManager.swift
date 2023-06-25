@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PaginationManager {
+final class PaginationManager {
 
     var pageNo: Int
     var pageSize: Int
